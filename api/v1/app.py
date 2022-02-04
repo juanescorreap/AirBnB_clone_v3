@@ -4,6 +4,7 @@ returnS the status of the API
 """
 from operator import imod
 from flask import Flask
+from flask.json import jsonify
 from models import storage
 from api.v1.views import app_views
 import os
@@ -16,6 +17,12 @@ app.register_blueprint(app_views)
 def close_session():
     """Closes current context"""
     storage.close()
+
+
+@app.errorhandler(404)
+def error_404():
+    """Handles 404 errors"""
+    return (jsonify({"error": "Not found"}))
 
 
 if __name__ == "__main__":
