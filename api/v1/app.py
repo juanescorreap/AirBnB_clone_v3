@@ -2,7 +2,6 @@
 """
 returnS the status of the API
 """
-from operator import imod
 from flask import Flask
 from flask.json import jsonify
 from models import storage
