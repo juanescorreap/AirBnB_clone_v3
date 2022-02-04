@@ -9,7 +9,8 @@ from models import storage
 from models.amenity import Amenity
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>',
+                 methods=['GET'], strict_slashes=False)
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
 def retrive_amenities(amenity_id=None):
     """" Retrives an Amenity object and returns a Json"""
@@ -48,7 +49,8 @@ def post_amenity():
     return make_response(jsonify(Amenity.to_dict(amenity)), 201)
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>',
+                 methods=['PUT'], strict_slashes=False)
 def put_amenity(amenity_id=None):
     """" Updates an Amenity object"""
     request_json = request.get_json()
