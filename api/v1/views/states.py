@@ -23,7 +23,8 @@ def retrive_states(state_id=None):
         return jsonify(State.to_dict(states))
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>',
+                 methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id=None):
     """" Deletes a State object and return an empty dict and 200 status"""
     state = storage.get(State, state_id)
