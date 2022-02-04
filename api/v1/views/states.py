@@ -15,7 +15,7 @@ def retrive_states(state_id=None):
     """" Retrives a state object and returns a Json"""
     if state_id is None:
         states = storage.all('State').values()
-        return jsonify([State.to_dict() for state in states])
+        return jsonify([State.to_dict(state) for state in states])
     else:
         states = storage.get(State, state_id)
         if not states:
@@ -44,7 +44,7 @@ def post_states():
         return make_response(jsonify({'error': 'Missing name'}), 400)
     state = State(**request_json)
     state.save()
-    return make_response(jsonify(state.to_dict()), 201)
+    return make_response(jsonify(State.to_dict(state)), 201)
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
@@ -61,4 +61,4 @@ def put_states(state_id=None):
         if key not in ignore_keys:
             setattr(state, key, value)
     state.save()
-    return make_response(jsonify(state.to_dict()), 200)
+    return make_response(jsonify(State.to_dict(state)), 200)

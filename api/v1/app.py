@@ -13,13 +13,13 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/*": {"origins": ["0.0.0.0"]}})
 
 @app.teardown_appcontext
-def close_session():
+def close_session(self):
     """Closes current context"""
     storage.close()
 
 
 @app.errorhandler(404)
-def error_404():
+def error_404(self):
     """Handles 404 errors"""
     return make_response(jsonify({'error': 'Not found'}), 404)
 
