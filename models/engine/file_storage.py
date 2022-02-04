@@ -73,9 +73,9 @@ class FileStorage:
         """method to retrieve one objec"""
         if cls not in classes:
             return None
-        key = "{}.{}".format(cls.__name__, id)
         obj_dict = self.all()
-        return (obj_dict.get(key))
+        key = "{}.{}".format(cls.__name__, id)
+        return obj_dict.get(key)
 
     def count(self, cls=None):
         """method to count the number of objects in storage"""
