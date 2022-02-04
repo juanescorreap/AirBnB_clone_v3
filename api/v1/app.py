@@ -14,15 +14,15 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def close_session():
-	"""Closes current context"""
-	storage.close()
+    """Closes current context"""
+    storage.close()
+
 
 if __name__ == "__main__":
-	host = os.getenv('HBNB_API_HOST')
-	port = os.getenv('HBNB_API_PORT')
-	if host is None:
-		host = "0.0.0.0"
-	if port is None:
-		port = '5000'
-	app.run(threaded=True)
-
+    host = os.getenv('HBNB_API_HOST')
+    port = os.getenv('HBNB_API_PORT')
+    if host is None:
+        host = "0.0.0.0"
+    if port is None:
+        port = '5000'
+    app.run(threaded=True)
