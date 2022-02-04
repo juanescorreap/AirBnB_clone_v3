@@ -3,12 +3,10 @@
 View for State objects that handles all default RESTFul API actions
 """
 
-from flask.helpers import make_response
 from api.v1.views import app_views
-from flask import jsonify, abort, request
+from flask import jsonify, abort, request, make_response
 from models import storage
 from models.state import State
-from requests import *
 
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
