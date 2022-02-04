@@ -77,9 +77,6 @@ class DBStorage:
 
     def get(self, cls=None, id=None):
         """method to retrieve one object"""
-        if cls not in classes:
-            return None
-
         obj_dict = self.all()
         key = "{}.{}".format(cls.__name__, id)
         return obj_dict.get(key)
