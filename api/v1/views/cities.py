@@ -10,7 +10,8 @@ from models.city import City
 from models import storage
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities',
+                 methods=['GET'], strict_slashes=False)
 def retrive_all_cities(state_id=None):
     """"Retrieves the list of all City objects of a State"""
     state = storage.get(State, state_id)
@@ -41,7 +42,8 @@ def delete_city(city_id=None):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route('/states/<state_id>/cities', methods=['POST'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities',
+                 methods=['POST'], strict_slashes=False)
 def post_city(state_id=None):
     """" Creates a City object"""
     request_json = request.get_json()
