@@ -14,7 +14,7 @@ def api_status():
 
 
 @app_views.route('/stats', strict_slashes=False)
-def class_objects():
+def stats():
     """retrieves the number of each objects by type"""
     objects_dict = {"amenities": storage.count('Amenity'),
                     "cities": storage.count('City'),
