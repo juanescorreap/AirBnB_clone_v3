@@ -11,7 +11,7 @@ from models.user import User
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
-def retrive_states(user_id=None):
+def retrive_users(user_id=None):
     """" Retrives a User object and returns a Json"""
     if user_id is None:
         users = storage.all('User').values()
