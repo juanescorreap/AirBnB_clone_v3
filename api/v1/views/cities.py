@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-View for State objects that handles all default RESTFul API actions
+View for City objects that handles all default RESTFul API actions
 """
 
 from api.v1.views import app_views
