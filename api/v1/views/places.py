@@ -5,13 +5,13 @@ View for Place objects that handles all default RESTFul API actions
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
-from models.state import State
 from models.place import Place
 from models.user import User
+from models.city import City
 from models import storage
 
 
-@app_views.route('/api/v1/cities/<city_id>/places',
+@app_views.route('/cities/<city_id>/places',
                  methods=['GET'], strict_slashes=False)
 def retrive_all_places(city_id=None):
     """"Retrieves the list of all Place objects of a City"""
@@ -49,7 +49,7 @@ def delete_place(place_id=None):
 def post_place(city_id=None):
     """" Creates a Place object"""
     request_json = request.get_json()
-    city = storage.get(Place, city_id)
+    city = storage.get(City, city_id)
     if not city:
         abort(404)
     if request_json is None:
@@ -62,6 +62,7 @@ def post_place(city_id=None):
     if 'name' not in request_json:
         return make_response(jsonify({'error': 'Missing name'}), 400)
     place = Place(**request_json)
+    place.city_id = city_id
     place.save()
     return make_response(jsonify(Place.to_dict(place)), 201)
 
@@ -75,7 +76,9 @@ def put_place(place_id=None):
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
+    ignore_keys = ['id', 'user_id', 'city_id', 'created_at', 'updated_at']
     for key, value in request_json.items():
-        setattr(place, key, value)
+        if key not in ignore_keys:
+            setattr(place, key, value)
     place.save()
     return make_response(jsonify(Place.to_dict(place)), 200)
