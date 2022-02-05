@@ -5,9 +5,9 @@ View for Place objects that handles all default RESTFul API actions
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
+from models.city import City
 from models.place import Place
 from models.user import User
-from models.city import City
 from models import storage
 
 
@@ -15,11 +15,11 @@ from models import storage
                  methods=['GET'], strict_slashes=False)
 def retrive_all_places(city_id=None):
     """"Retrieves the list of all Place objects of a City"""
-    city = storage.get(Place, city_id)
+    city = storage.get(City, city_id)
     if not city:
         abort(404)
     city_places = city.places
-    return jsonify([Place.to_dict(city) for city in city_places]), 200
+    return jsonify([Place.to_dict(place) for place in city_places]), 200
 
 
 @app_views.route('/places/<place_id>', methods=['GET'], strict_slashes=False)
